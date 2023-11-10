@@ -10,4 +10,6 @@ july
 datatable
 datetime
 lazypredict
-sklearn
+optuna
+shap
+xgboost

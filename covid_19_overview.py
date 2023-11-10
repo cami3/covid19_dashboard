@@ -1645,45 +1645,45 @@ from lazypredict.Supervised import (  # pip install lazypredict
     LazyClassifier,
     LazyRegressor,
 )
-from sklearn.datasets import load_boston
+#from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
 
 # Load data and split
-X, y = load_boston(return_X_y=True)
-st.code('X, y = load_boston(return_X_y=True)')
-cols = st.columns((1,1))
-cols[0].markdown('X set')
-cols[0].write(X)
-cols[1].markdown('y target')
-cols[1].write(y)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-cols[0].code('Sets: X_train and X_test')
-cols[1].code('targets: y_train and y_test')
-cols[0].markdown('X training set')
-cols[0].write(X_train)
-cols[1].markdown('y training target')
-cols[1].write(y_train)
-cols[0].markdown('X validation set')
-cols[0].write(X_test)
-cols[1].markdown('y validation target')
-cols[1].write(y_test)
+# X, y = load_boston(return_X_y=True)
+# st.code('X, y = load_boston(return_X_y=True)')
+# cols = st.columns((1,1))
+# cols[0].markdown('X set')
+# cols[0].write(X)
+# cols[1].markdown('y target')
+# cols[1].write(y)
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# cols[0].code('Sets: X_train and X_test')
+# cols[1].code('targets: y_train and y_test')
+# cols[0].markdown('X training set')
+# cols[0].write(X_train)
+# cols[1].markdown('y training target')
+# cols[1].write(y_train)
+# cols[0].markdown('X validation set')
+# cols[0].write(X_test)
+# cols[1].markdown('y validation target')
+# cols[1].write(y_test)
 
-# Fit LazyRegressor
-reg = LazyRegressor(
-    ignore_warnings=True, random_state=1121218, verbose=False
-  )
-models, predictions = reg.fit(X_train, X_test, y_train, y_test)  # pass all sets
+# # Fit LazyRegressor
+# reg = LazyRegressor(
+#     ignore_warnings=True, random_state=1121218, verbose=False
+#   )
+# models, predictions = reg.fit(X_train, X_test, y_train, y_test)  # pass all sets
 
-st.code('\
-# Fit LazyRegressor\n\
-reg = LazyRegressor(\
-    ignore_warnings=True, random_state=1121218, verbose=False\
-  )\n\
-models, predictions = reg.fit(X_train, X_test, y_train, y_test)  # pass all sets')
-st.code('models')
-st.write(models)
-st.code('predictions')
-st.write(predictions)
+# st.code('\
+# # Fit LazyRegressor\n\
+# reg = LazyRegressor(\
+#     ignore_warnings=True, random_state=1121218, verbose=False\
+#   )\n\
+# models, predictions = reg.fit(X_train, X_test, y_train, y_test)  # pass all sets')
+# st.code('models')
+# st.write(models)
+# st.code('predictions')
+# st.write(predictions)
 
 st.markdown('Trying to predict the value of terapia_intensiva in the Italian regions dataset using LazyRegressor')
 X = data_Ita_REGIONI.query('terapia_intensiva == terapia_intensiva and ricoverati_con_sintomi == ricoverati_con_sintomi and \
