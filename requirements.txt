@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+altair
+matplotlib
+plotly
+plotly-express
+calplot
+july
+datatable
+datetime
+itertools
