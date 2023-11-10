@@ -47,7 +47,7 @@ import itertools
 from helpers import load_data, load_data_ita, rollup_1day, shift_1day
 
 import locale
-locale.setlocale(locale.LC_ALL, 'it_IT')
+#locale.setlocale(locale.LC_TIME, 'it_IT')
 
 # Set dashboard pages configuration
 st.set_page_config(
