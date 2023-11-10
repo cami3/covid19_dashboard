@@ -72,11 +72,11 @@ fontfamily = "Rockwell"
 # Set title, subheader
 st.title('Pandemia di COVID-19')
 st.markdown('La presente applicazione permette: \
-    \* la visualizzazione dei dati relativi alla diffusione della \
+    \n>* la visualizzazione dei dati relativi alla diffusione della \
     malattia in tutto il mondo; \
-    \* la visualizzazione dei dati per un continente e per una nazione a scelta; \
-    \* la visualizzazione dei dati raccolti dalle regioni e dalle province in Italia; \
-    \* il confronto della situazione in diverse nazioni a scelta.')
+    \n>* la visualizzazione dei dati per un continente e per una nazione a scelta; \
+    \n>* la visualizzazione dei dati raccolti dalle regioni e dalle province in Italia; \
+    \n>* il confronto della situazione in diverse nazioni a scelta.')
 with st.expander('Clicca (espandi/riduci) - Denominazione della nuova malattia da coronavirus'):
     st.markdown('__Cit. de__ «Portale Italiano delle Classificazioni Sanitarie».')
     st.markdown("Sito web: https://www.reteclassificazioni.it/portal_main.php?&portal_view=home")
