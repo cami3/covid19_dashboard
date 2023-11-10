@@ -1668,10 +1668,10 @@ from sklearn.model_selection import train_test_split
 # cols[1].markdown('y validation target')
 # cols[1].write(y_test)
 
-# # Fit LazyRegressor
-# reg = LazyRegressor(
-#     ignore_warnings=True, random_state=1121218, verbose=False
-#   )
+# Fit LazyRegressor
+reg = LazyRegressor(
+    ignore_warnings=True, random_state=1121218, verbose=False
+  )
 # models, predictions = reg.fit(X_train, X_test, y_train, y_test)  # pass all sets
 
 # st.code('\
