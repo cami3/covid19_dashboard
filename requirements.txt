@@ -2,7 +2,7 @@ streamlit
 pandas
 numpy
 altair
-matplotlib
+matplotlib==3.2.2
 plotly
 plotly-express
 calplot
