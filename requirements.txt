@@ -10,3 +10,4 @@ july
 datatable
 datetime
 lazypredict
+sklearn
