@@ -159,7 +159,7 @@ def color_negative_red(val):
     strings, black otherwise.
     Not compatible with non-unique index or columns.
     """
-    color = 'red' if val < 0 else None
+    color = 'red' if val < 0 else 'black'
     return 'color: %s' % color
 
 # Display raw data with checkbox hide/display
