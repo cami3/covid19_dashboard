@@ -428,8 +428,7 @@ with cols[1].expander('TABELLA - Vaccinazioni complete nel mondo al %s e al gior
         dataframe.loc[start][['latest_people_fully_vaccinated', 'latest_people_fully_vaccinated_on_previous_day']].sum(
         axis=0
         ).rename(
-        'Mondo', 
-        axis=1).rename(
+        'Mondo').rename(
         {'latest_people_fully_vaccinated': 'Vaccinazioni complete',
         'latest_people_fully_vaccinated_on_previous_day': 'Vaccinazioni complete al giorno precedente'},
         axis=0)
