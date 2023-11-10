@@ -1,0 +1,81 @@
+#
+# Define functions for loading paths to environmental variables.
+#
+
+# Search for pkgconfig directories in a given path and load them to the
+# PKG_CONFIG_PATH environmental variable.
+#   $1 - absolute path of directory
+pkgconfig_find() {
+  if [ -d "${1}" ]; then
+    local PKG_CONFIG_PATH_NEW=$(find "${1}" -type d -name "pkgconfig" -print | \
+                                tr '\n' ':')
+    if ! [[ "${PKG_CONFIG_PATH_NEW}" == "" ]] && \
+       ! [[ "${PKG_CONFIG_PATH}" =~ "${PKG_CONFIG_PATH_NEW}" ]]; then
+      export PKG_CONFIG_PATH="${PKG_CONFIG_PATH_NEW}${PKG_CONFIG_PATH}"
+    fi
+  fi
+}
+
+# Add directories in the `pkg-config --libs` output for a particular library to
+# the LD_LIBRARY_PATH environmental variable. Fixes linker issues when running
+# binaries compiled against libraries in stored in exotic directories.
+#   $1 - library name input to pkg-config
+ld_lib_add() {
+  local LIB_PATH=$(pkg-config --libs "${1}" 2>/dev/null | \
+                   sed -n "s,-L\(.*\)\ -l.*,\1,p")
+  if ! [[ "${LIB_PATH}" == "" ]] && \
+     ! [[ "${LD_LIBRARY_PATH}" =~ "${LIB_PATH}" ]]; then
+    export LD_LIBRARY_PATH="${LIB_PATH}:${LD_LIBRARY_PATH}"
+  fi
+}
+
+# Add specified paths to the LD_LIBRARY_PATH.
+#   $1 - absolute path of directory
+ld_path_add() {
+  if [ -d "${1}" ]; then
+    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(readlink -f "${1}")"
+  fi
+}
+
+# Use GCC on non-standard path. Supply a path to a GCC binary, and the script
+# will then alias gcc to the corresponding binaries and override the CC and CXX
+# environmental variables.
+#   $1 - absolute path to gcc binary file
+set_gcc() {
+  local GCC="$(echo "${1}" | sed -e "s,/g++\([0-9\-]*\)$,/gcc\1,g")"
+  local GXX="$(echo "${1}" | sed -e "s,/gcc\([0-9\-]*\)$,/g++\1,g")"
+  if [ -f "${GCC}" ] && [ -f "${GXX}" ]; then
+    alias gcc="${GCC}"
+    alias g++="${GXX}"
+    export CC="${GCC}"
+    export CXX="${GXX}"
+  fi
+}
+
+# Generic wrapper function, in a similar spirit as set_gcc, that creates an
+# alias for a specified binary and also export to global environmental
+# variables, if specified.
+#  $1 - absolute path to binary
+#  $2 - desired alias
+#  $3 - (optional) desired environmental variable
+set_alias() {
+  if [ -f "${1}" ]; then
+    alias "${2}"="${1}"
+    if [ "$#" -eq 3 ]; then
+      export "${3}"="${1}"
+    fi
+  fi
+}
+
+
+#
+# Set aliases and load paths
+#
+
+# Add alias for Homebrew GCC and export to CC and CXX environment variables.
+set_gcc /usr/local/bin/gcc-9  # from Homebrew
+# set_gcc /usr/local/Cellar/gcc/bin/gcc-9
+
+# Look for pkg-config directories
+pkgconfig_find /usr/local/Cellar  # from Homebrew
+ld_lib_add armadillo 
